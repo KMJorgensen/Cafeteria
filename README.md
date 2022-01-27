@@ -1,4 +1,4 @@
-# CData and R code to reproduce results in the submitted manuscript:
+# Data and R code to reproduce results in the submitted manuscript:
 
 ## Mycelial foraging strategies of ectomycorrhizal fungi in boreal Picea abies forests
 By: Karolina Jörgensen, Karina Clemmensen, Håkan Wallander, Björn Lindahl

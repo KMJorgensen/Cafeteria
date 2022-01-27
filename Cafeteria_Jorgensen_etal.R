@@ -1,6 +1,6 @@
 # R-script to reproduce analyses for:
 #"Mycelial foraging strategies and phenotypic plasticity of ectomycorrhizal fungi in boreal Picea abies forests"
-# Jörgensen, K., Clemmensen, KE., Wallander, H., Lindahl, BD. 
+# JÃ¶rgensen, K., Clemmensen, KE., Wallander, H., Lindahl, BD. 
 
 
 # Contact about R script: karolina.jorgensen@slu.se                          
@@ -22,8 +22,6 @@ library(tidyr) # ver 1.1.2
 library(ggplot2) # ver 3.3.3
 library(sjPlot) # ver 2.8.7 
 library(ggpubr) # ver 0.4.0
-
-setwd("~/docs/Dokument/Projekt/VR-projekt/Cafeteriaexperiment/Submission_prep")
 
 # Load dataset with untransformed relative abundance of ECM community of 
 # 15 most frequent genera in cafeterias.

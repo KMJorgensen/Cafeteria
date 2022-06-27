@@ -1,6 +1,6 @@
 # R-script to reproduce analyses for:
 #"A critical test of ectomycorrhizal exploration types as predictors of mycelial foraging"
-# Jörgensen, K., Clemmensen, KE., Wallander, H., Lindahl, BD. 
+# JÃ¶rgensen, K., Clemmensen, KE., Wallander, H., Lindahl, BD. 
 
 # Contact about R script: karolina.jorgensen@slu.se                          
 
@@ -42,7 +42,6 @@ library(ggpubr) # ver 0.4.0
 library(stringr) # ver 1.4.0
 
 # Load data sets ####
-setwd("~/docs/Dokument/Projekt/VR-projekt/Cafeteriaexperiment/Submission_prep/New Phytologist - revision/For GitHub")
 
 data <- read.csv2("genera_logratios.csv", header = TRUE) #from Cafeteria_Jorgensen_etal_logrations.R
 

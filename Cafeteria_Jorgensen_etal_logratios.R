@@ -1,6 +1,6 @@
 # R-script to reproduce analyses for:
 #"A critical test of ectomycorrhizal exploration types as predictors of mycelial foraging"
-# Jörgensen, K., Clemmensen, KE., Wallander, H., Lindahl, BD. 
+# JÃ¶rgensen, K., Clemmensen, KE., Wallander, H., Lindahl, BD. 
 
 # Contact about R script: karolina.jorgensen@slu.se                          
 
@@ -16,10 +16,9 @@ library(tidyr) # ver 1.1.2
 # ABUT THE SCRIPT ####
 # This script is used to calculate log ratios of abundance of ectomycorrhizal genera
 # Ratios are calculated as:
-# Roots vs. ingrowth bags = log(mean(all bags)+µ/roots)
-# Soil bags vs. sand bags = log((mean(soil)+µ)/(mean(sand)+µ))
+# Roots vs. ingrowth bags = log(mean(all bags)+Âµ/roots)
+# Soil bags vs. sand bags = log((mean(soil)+Âµ)/(mean(sand)+Âµ))
 
-setwd("~/docs/Dokument/Projekt/VR-projekt/Cafeteriaexperiment/Submission_prep/New Phytologist - revision/For GitHub")
 
 # Load dataset with relative abundance (of ECM community) of 
 # 12 genera that are present on roots in at least 10 cafeterias.
@@ -41,10 +40,10 @@ data$Bag_root <- as.factor(data$Bag_root) # Root or ingrowth bag
 
 colnames(data) # fungal genera in columns 8:19
 
-# Note about µ ####
+# Note about Âµ ####
 # Average sequencing depth is 1881 counts per sample, there are 6 substrate types in each cafeteria.
-# Create a constant (µ) that will be added to abundances in bags to avoid 0 division
-µ <- 1/(6*1881)
+# Create a constant (Âµ) that will be added to abundances in bags to avoid 0 division
+Âµ <- 1/(6*1881)
 
 # Calculate log-ratios ####
 
@@ -72,7 +71,7 @@ aman.bag.mean <- aman.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 aman.bag.root <- left_join(aman.roots, aman.bag.mean, by = "Cafeteria.ID")
-aman.bag.root$log.ratio <- log((aman.bag.root$mean.bags + µ)/aman.bag.root$Amanita)
+aman.bag.root$log.ratio <- log((aman.bag.root$mean.bags + Âµ)/aman.bag.root$Amanita)
 
 # ___Sandbag-soilbag comparison ####
 aman.soil <- aman.data %>% filter(Bagtype == "Soilbag")
@@ -92,7 +91,7 @@ aman.sand.mean <- aman.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 aman.bagtypes <- left_join(aman.soil.mean, aman.sand.mean, by = "Cafeteria.ID")
-aman.bagtypes$log.ratio <- log((aman.bagtypes$mean.soilbags+µ)/(aman.bagtypes$mean.sandbags+µ))
+aman.bagtypes$log.ratio <- log((aman.bagtypes$mean.soilbags+Âµ)/(aman.bagtypes$mean.sandbags+Âµ))
 
 
 #___Gather into one DF ####
@@ -130,7 +129,7 @@ amph.bag.mean <- amph.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 amph.bag.root <- left_join(amph.roots, amph.bag.mean, by = "Cafeteria.ID")
-amph.bag.root$log.ratio <- log((amph.bag.root$mean.bags + µ)/amph.bag.root$Amphinema)
+amph.bag.root$log.ratio <- log((amph.bag.root$mean.bags + Âµ)/amph.bag.root$Amphinema)
 
 # ___Sandbag-soilbag comparison ####
 amph.soil <- amph.data %>% filter(Bagtype == "Soilbag")
@@ -150,7 +149,7 @@ amph.sand.mean <- amph.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 amph.bagtypes <- left_join(amph.soil.mean, amph.sand.mean, by = "Cafeteria.ID")
-amph.bagtypes$log.ratio <- log((amph.bagtypes$mean.soilbags+µ)/(amph.bagtypes$mean.sandbags+µ))
+amph.bagtypes$log.ratio <- log((amph.bagtypes$mean.soilbags+Âµ)/(amph.bagtypes$mean.sandbags+Âµ))
 
 
 #___Gather into one DF ####
@@ -188,7 +187,7 @@ ceno.bag.mean <- ceno.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 ceno.bag.root <- left_join(ceno.roots, ceno.bag.mean, by = "Cafeteria.ID")
-ceno.bag.root$log.ratio <- log((ceno.bag.root$mean.bags + µ)/ceno.bag.root$Cenococcum)
+ceno.bag.root$log.ratio <- log((ceno.bag.root$mean.bags + Âµ)/ceno.bag.root$Cenococcum)
 
 # ___Sandbag-soilbag comparison ####
 ceno.soil <- ceno.data %>% filter(Bagtype == "Soilbag")
@@ -208,7 +207,7 @@ ceno.sand.mean <- ceno.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 ceno.bagtypes <- left_join(ceno.soil.mean, ceno.sand.mean, by = "Cafeteria.ID")
-ceno.bagtypes$log.ratio <- log((ceno.bagtypes$mean.soilbags+µ)/(ceno.bagtypes$mean.sandbags+µ))
+ceno.bagtypes$log.ratio <- log((ceno.bagtypes$mean.soilbags+Âµ)/(ceno.bagtypes$mean.sandbags+Âµ))
 
 
 #___Gather into one DF ####
@@ -246,7 +245,7 @@ cort.bag.mean <- cort.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 cort.bag.root <- left_join(cort.roots, cort.bag.mean, by = "Cafeteria.ID")
-cort.bag.root$log.ratio <- log((cort.bag.root$mean.bags + µ)/cort.bag.root$Cortinarius)
+cort.bag.root$log.ratio <- log((cort.bag.root$mean.bags + Âµ)/cort.bag.root$Cortinarius)
 
 # ___Sandbag-soilbag comparison ####
 cort.soil <- cort.data %>% filter(Bagtype == "Soilbag")
@@ -266,7 +265,7 @@ cort.sand.mean <- cort.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 cort.bagtypes <- left_join(cort.soil.mean, cort.sand.mean, by = "Cafeteria.ID")
-cort.bagtypes$log.ratio <- log((cort.bagtypes$mean.soilbags+µ)/(cort.bagtypes$mean.sandbags+µ))
+cort.bagtypes$log.ratio <- log((cort.bagtypes$mean.soilbags+Âµ)/(cort.bagtypes$mean.sandbags+Âµ))
 
 #___Gather into one DF ####
 cortinarius.logratios <- data_frame(matrix(NA, nrow=nrow(cort.bag.root)))
@@ -303,7 +302,7 @@ hyal.bag.mean <- hyal.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 hyal.bag.root <- left_join(hyal.roots, hyal.bag.mean, by = "Cafeteria.ID")
-hyal.bag.root$log.ratio <- log((hyal.bag.root$mean.bags + µ)/hyal.bag.root$Hyaloscypha)
+hyal.bag.root$log.ratio <- log((hyal.bag.root$mean.bags + Âµ)/hyal.bag.root$Hyaloscypha)
 
 # ___Sandbag-soilbag comparison ####
 hyal.soil <- hyal.data %>% filter(Bagtype == "Soilbag")
@@ -323,7 +322,7 @@ hyal.sand.mean <- hyal.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 hyal.bagtypes <- left_join(hyal.soil.mean, hyal.sand.mean, by = "Cafeteria.ID")
-hyal.bagtypes$log.ratio <- log((hyal.bagtypes$mean.soilbags+µ)/(hyal.bagtypes$mean.sandbags+µ))
+hyal.bagtypes$log.ratio <- log((hyal.bagtypes$mean.soilbags+Âµ)/(hyal.bagtypes$mean.sandbags+Âµ))
 
 #___Gather into one DF ####
 hyaloscypha.logratios <- data_frame(matrix(NA, nrow=nrow(hyal.bag.root)))
@@ -360,7 +359,7 @@ hyg.bag.mean <- hyg.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 hyg.bag.root <- left_join(hyg.roots, hyg.bag.mean, by = "Cafeteria.ID")
-hyg.bag.root$log.ratio <- log((hyg.bag.root$mean.bags + µ)/hyg.bag.root$Hygrophorus)
+hyg.bag.root$log.ratio <- log((hyg.bag.root$mean.bags + Âµ)/hyg.bag.root$Hygrophorus)
 
 # ___Sandbag-soilbag comparison ####
 hyg.soil <- hyg.data %>% filter(Bagtype == "Soilbag")
@@ -380,7 +379,7 @@ hyg.sand.mean <- hyg.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 hyg.bagtypes <- left_join(hyg.soil.mean, hyg.sand.mean, by = "Cafeteria.ID")
-hyg.bagtypes$log.ratio <- log((hyg.bagtypes$mean.soilbags+µ)/(hyg.bagtypes$mean.sandbags+µ))
+hyg.bagtypes$log.ratio <- log((hyg.bagtypes$mean.soilbags+Âµ)/(hyg.bagtypes$mean.sandbags+Âµ))
 
 #___Gather into one DF ####
 hygrophorus.logratios <- data_frame(matrix(NA, nrow=nrow(hyg.bag.root)))
@@ -417,7 +416,7 @@ lact.bag.mean <- lact.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 lact.bag.root <- left_join(lact.roots, lact.bag.mean, by = "Cafeteria.ID")
-lact.bag.root$log.ratio <- log((lact.bag.root$mean.bags + µ)/lact.bag.root$Lactarius)
+lact.bag.root$log.ratio <- log((lact.bag.root$mean.bags + Âµ)/lact.bag.root$Lactarius)
 
 # ___Sandbag-soilbag comparison ####
 lact.soil <- lact.data %>% filter(Bagtype == "Soilbag")
@@ -437,7 +436,7 @@ lact.sand.mean <- lact.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 lact.bagtypes <- left_join(lact.soil.mean, lact.sand.mean, by = "Cafeteria.ID")
-lact.bagtypes$log.ratio <- log((lact.bagtypes$mean.soilbags+µ)/(lact.bagtypes$mean.sandbags+µ))
+lact.bagtypes$log.ratio <- log((lact.bagtypes$mean.soilbags+Âµ)/(lact.bagtypes$mean.sandbags+Âµ))
 
 #___Gather into one DF ####
 lactarius.logratios <- data_frame(matrix(NA, nrow=nrow(lact.bag.root)))
@@ -474,7 +473,7 @@ pilo.bag.mean <- pilo.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 pilo.bag.root <- left_join(pilo.roots, pilo.bag.mean, by = "Cafeteria.ID")
-pilo.bag.root$log.ratio <- log((pilo.bag.root$mean.bags + µ)/pilo.bag.root$Piloderma)
+pilo.bag.root$log.ratio <- log((pilo.bag.root$mean.bags + Âµ)/pilo.bag.root$Piloderma)
 
 # ___Sandbag-soilbag comparison ####
 pilo.soil <- pilo.data %>% filter(Bagtype == "Soilbag")
@@ -494,7 +493,7 @@ pilo.sand.mean <- pilo.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 pilo.bagtypes <- left_join(pilo.soil.mean, pilo.sand.mean, by = "Cafeteria.ID")
-pilo.bagtypes$log.ratio <- log((pilo.bagtypes$mean.soilbags+µ)/(pilo.bagtypes$mean.sandbags+µ))
+pilo.bagtypes$log.ratio <- log((pilo.bagtypes$mean.soilbags+Âµ)/(pilo.bagtypes$mean.sandbags+Âµ))
 
 #___Gather into one DF ####
 piloderma.logratios <- data_frame(matrix(NA, nrow=nrow(pilo.bag.root)))
@@ -531,7 +530,7 @@ pseu.bag.mean <- pseu.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 pseu.bag.root <- left_join(pseu.roots, pseu.bag.mean, by = "Cafeteria.ID")
-pseu.bag.root$log.ratio <- log((pseu.bag.root$mean.bags + µ)/pseu.bag.root$Pseudotomentella)
+pseu.bag.root$log.ratio <- log((pseu.bag.root$mean.bags + Âµ)/pseu.bag.root$Pseudotomentella)
 
 # ___Sandbag-soilbag comparison ####
 pseu.soil <- pseu.data %>% filter(Bagtype == "Soilbag")
@@ -551,7 +550,7 @@ pseu.sand.mean <- pseu.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 pseu.bagtypes <- left_join(pseu.soil.mean, pseu.sand.mean, by = "Cafeteria.ID")
-pseu.bagtypes$log.ratio <- log((pseu.bagtypes$mean.soilbags+µ)/(pseu.bagtypes$mean.sandbags+µ))
+pseu.bagtypes$log.ratio <- log((pseu.bagtypes$mean.soilbags+Âµ)/(pseu.bagtypes$mean.sandbags+Âµ))
 
 #___Gather into one DF ####
 pseudotomentella.logratios <- data_frame(matrix(NA, nrow=nrow(pseu.bag.root)))
@@ -588,7 +587,7 @@ russ.bag.mean <- russ.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 russ.bag.root <- left_join(russ.roots, russ.bag.mean, by = "Cafeteria.ID")
-russ.bag.root$log.ratio <- log((russ.bag.root$mean.bags + µ)/russ.bag.root$Russula)
+russ.bag.root$log.ratio <- log((russ.bag.root$mean.bags + Âµ)/russ.bag.root$Russula)
 
 # ___Sandbag-soilbag comparison ####
 russ.soil <- russ.data %>% filter(Bagtype == "Soilbag")
@@ -608,7 +607,7 @@ russ.sand.mean <- russ.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 russ.bagtypes <- left_join(russ.soil.mean, russ.sand.mean, by = "Cafeteria.ID")
-russ.bagtypes$log.ratio <- log((russ.bagtypes$mean.soilbags+µ)/(russ.bagtypes$mean.sandbags+µ))
+russ.bagtypes$log.ratio <- log((russ.bagtypes$mean.soilbags+Âµ)/(russ.bagtypes$mean.sandbags+Âµ))
 
 #___Gather into one DF ####
 russula.logratios <- data_frame(matrix(NA, nrow=nrow(russ.bag.root)))
@@ -645,7 +644,7 @@ tomen.bag.mean <- tomen.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 tomen.bag.root <- left_join(tomen.roots, tomen.bag.mean, by = "Cafeteria.ID")
-tomen.bag.root$log.ratio <- log((tomen.bag.root$mean.bags + µ)/tomen.bag.root$Tomentella_Thelephora)
+tomen.bag.root$log.ratio <- log((tomen.bag.root$mean.bags + Âµ)/tomen.bag.root$Tomentella_Thelephora)
 
 # ___Sandbag-soilbag comparison ####
 tomen.soil <- tomen.data %>% filter(Bagtype == "Soilbag")
@@ -665,7 +664,7 @@ tomen.sand.mean <- tomen.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 tomen.bagtypes <- left_join(tomen.soil.mean, tomen.sand.mean, by = "Cafeteria.ID")
-tomen.bagtypes$log.ratio <- log((tomen.bagtypes$mean.soilbags+µ)/(tomen.bagtypes$mean.sandbags+µ))
+tomen.bagtypes$log.ratio <- log((tomen.bagtypes$mean.soilbags+Âµ)/(tomen.bagtypes$mean.sandbags+Âµ))
 
 #___Gather into one DF ####
 tomentella.logratios <- data_frame(matrix(NA, nrow=nrow(tomen.bag.root)))
@@ -702,7 +701,7 @@ tylo.bag.mean <- tylo.bag.long %>%
     mean.bags=mean(Rel_abund, na.rm = FALSE))
 
 tylo.bag.root <- left_join(tylo.roots, tylo.bag.mean, by = "Cafeteria.ID")
-tylo.bag.root$log.ratio <- log((tylo.bag.root$mean.bags + µ)/tylo.bag.root$Tylospora)
+tylo.bag.root$log.ratio <- log((tylo.bag.root$mean.bags + Âµ)/tylo.bag.root$Tylospora)
 
 # ___Sandbag-soilbag comparison ####
 tylo.soil <- tylo.data %>% filter(Bagtype == "Soilbag")
@@ -722,7 +721,7 @@ tylo.sand.mean <- tylo.sand.long %>%
     mean.sandbags=mean(Rel_abund, na.rm = FALSE))
 
 tylo.bagtypes <- left_join(tylo.soil.mean, tylo.sand.mean, by = "Cafeteria.ID")
-tylo.bagtypes$log.ratio <- log((tylo.bagtypes$mean.soilbags+µ)/(tylo.bagtypes$mean.sandbags+µ))
+tylo.bagtypes$log.ratio <- log((tylo.bagtypes$mean.soilbags+Âµ)/(tylo.bagtypes$mean.sandbags+Âµ))
 
 #___Gather into one DF ####
 tylospora.logratios <- data_frame(matrix(NA, nrow=nrow(tylo.bag.root)))
